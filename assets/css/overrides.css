@@ -191,8 +191,9 @@ pre {
 }
 
 #readme-image {
-    max-height: 100%;
-    max-width: 100%;
+    max-widht: 1581px;
+    max-height: 949px;
+    padding-right: 20px;
 }
 
 #separator {
