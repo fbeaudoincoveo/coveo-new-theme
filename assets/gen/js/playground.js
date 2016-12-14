@@ -67,9 +67,9 @@ var playground =
 	var Dom_1 = __webpack_require__(3);
 	var Component_1 = __webpack_require__(10);
 	var SearchEndpoint_1 = __webpack_require__(43);
-	var RegisteredNamedMethods_1 = __webpack_require__(82);
-	var PlaygroundConfiguration_1 = __webpack_require__(145);
-	var ResultList_1 = __webpack_require__(146);
+	var RegisteredNamedMethods_1 = __webpack_require__(83);
+	var PlaygroundConfiguration_1 = __webpack_require__(146);
+	var ResultList_1 = __webpack_require__(147);
 	var QueryEvents_1 = __webpack_require__(23);
 	var Playground = (function () {
 	    function Playground(body) {
@@ -1614,9 +1614,9 @@ var playground =
 	var ComponentOptionsModel_1 = __webpack_require__(15);
 	var QueryController_1 = __webpack_require__(16);
 	var SearchInterface_1 = __webpack_require__(42);
-	var NoopAnalyticsClient_1 = __webpack_require__(74);
+	var NoopAnalyticsClient_1 = __webpack_require__(75);
 	var BaseComponent_1 = __webpack_require__(13);
-	var DebugEvents_1 = __webpack_require__(77);
+	var DebugEvents_1 = __webpack_require__(78);
 	/**
 	 * The base class for every component in the framework.
 	 */
@@ -5774,19 +5774,19 @@ var playground =
 	var QueryController_1 = __webpack_require__(16);
 	var Model_1 = __webpack_require__(12);
 	var QueryEvents_1 = __webpack_require__(23);
-	var StandaloneSearchInterfaceEvents_1 = __webpack_require__(71);
-	var HistoryController_1 = __webpack_require__(72);
-	var LocalStorageHistoryController_1 = __webpack_require__(73);
+	var StandaloneSearchInterfaceEvents_1 = __webpack_require__(72);
+	var HistoryController_1 = __webpack_require__(73);
+	var LocalStorageHistoryController_1 = __webpack_require__(74);
 	var InitializationEvents_1 = __webpack_require__(57);
-	var NoopAnalyticsClient_1 = __webpack_require__(74);
+	var NoopAnalyticsClient_1 = __webpack_require__(75);
 	var Utils_1 = __webpack_require__(6);
 	var RootComponent_1 = __webpack_require__(17);
 	var BaseComponent_1 = __webpack_require__(13);
-	var Debug_1 = __webpack_require__(75);
+	var Debug_1 = __webpack_require__(76);
 	var HashUtils_1 = __webpack_require__(58);
-	var FastClick = __webpack_require__(79);
-	var timezone = __webpack_require__(80);
-	var SentryLogger_1 = __webpack_require__(81);
+	var FastClick = __webpack_require__(80);
+	var timezone = __webpack_require__(81);
+	var SentryLogger_1 = __webpack_require__(82);
 	/**
 	 * This component is the root and main component of your search interface.<br/>
 	 * You should place every other component inside this component.<br/>
@@ -8915,7 +8915,7 @@ var playground =
 	        if (searchInterface.options.autoTriggerQuery) {
 	            Initialization.logFirstQueryCause(searchInterface);
 	            Component_1.Component.get(element, QueryController_1.QueryController).executeQuery({
-	                logInActionsHistory: searchInterface instanceof Coveo['Recommendation'] ? false : true,
+	                logInActionsHistory: Coveo['Recommendation'] && searchInterface instanceof Coveo['Recommendation'],
 	                isFirstQuery: true
 	            });
 	        }
@@ -10184,7 +10184,7 @@ var playground =
 	"use strict";
 	var Dom_1 = __webpack_require__(3);
 	var DateUtils_1 = __webpack_require__(67);
-	var FileTypes_1 = __webpack_require__(70);
+	var FileTypes_1 = __webpack_require__(71);
 	var Utils_1 = __webpack_require__(6);
 	var StringUtils_1 = __webpack_require__(55);
 	var DomUtils = (function () {
@@ -10236,7 +10236,7 @@ var playground =
 	        }
 	        var fileType = FileTypes_1.FileTypes.get(result);
 	        var header = Dom_1.$$('div');
-	        header.el.innerHTML = "<div class='coveo-quickview-right-header'>\n        <span class='coveo-quickview-time'>" + date + "</span>\n        <span class='coveo-quickview-close-button'>\n          <span class='coveo-icon coveo-sprites-common-clear'></span>\n        </span>\n      </div>\n      <div class='coveo-quickview-left-header'>\n        <span class='coveo-quickview-icon coveo-small " + fileType.icon + "'></span>\n        <span class='coveo-quickview-pop-up-reminder'> " + (options.title || '') + "</span>\n      </div>";
+	        header.el.innerHTML = "<div class='coveo-quickview-right-header'>\n        <span class='coveo-quickview-time'>" + date + "</span>\n        <span class='coveo-quickview-close-button'>\n          <span class='coveo-icon coveo-sprites-common-clear'></span>\n        </span>\n      </div>\n      <div class='coveo-quickview-left-header'>\n        <span class='coveo-quickview-icon coveo-small " + fileType.icon + "'></span>\n        <a class='coveo-quickview-pop-up-reminder'> " + (options.title || '') + "</a>\n      </div>";
 	        new Coveo[Coveo['Salesforce'] ? 'SalesforceResultLink' : 'ResultLink'](header.find('.coveo-quickview-pop-up-reminder'), undefined, bindings, result);
 	        return header;
 	    };
@@ -10444,13 +10444,20 @@ var playground =
 /* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["Globalize"] = __webpack_require__(70);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/*! globalize - v0.1.1 - 2013-04-30
 	* https://github.com/jquery/globalize
 	* Copyright 2013 ; Licensed MIT */
 	var Globalize = (function(e,r){var t,n,a,s,u,l,i,c,o,f,d,p,h,g,b,m,y,M,v,k,z,F,A,x;t=function(e){return new t.prototype.init(e)}, true?module.exports=t:e.Globalize=t,t.cultures={},t.prototype={constructor:t,init:function(e){return this.cultures=t.cultures,this.cultureSelector=e,this}},t.prototype.init.prototype=t.prototype,t.cultures["default"]={name:"en",englishName:"English",nativeName:"English",isRTL:!1,language:"en",numberFormat:{pattern:["-n"],decimals:2,",":",",".":".",groupSizes:[3],"+":"+","-":"-",NaN:"NaN",negativeInfinity:"-Infinity",positiveInfinity:"Infinity",percent:{pattern:["-n %","n %"],decimals:2,groupSizes:[3],",":",",".":".",symbol:"%"},currency:{pattern:["($n)","$n"],decimals:2,groupSizes:[3],",":",",".":".",symbol:"$"}},calendars:{standard:{name:"Gregorian_USEnglish","/":"/",":":":",firstDay:0,days:{names:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],namesAbbr:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],namesShort:["Su","Mo","Tu","We","Th","Fr","Sa"]},months:{names:["January","February","March","April","May","June","July","August","September","October","November","December",""],namesAbbr:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",""]},AM:["AM","am","AM"],PM:["PM","pm","PM"],eras:[{name:"A.D.",start:null,offset:0}],twoDigitYearMax:2029,patterns:{d:"M/d/yyyy",D:"dddd, MMMM dd, yyyy",t:"h:mm tt",T:"h:mm:ss tt",f:"dddd, MMMM dd, yyyy h:mm tt",F:"dddd, MMMM dd, yyyy h:mm:ss tt",M:"MMMM dd",Y:"yyyy MMMM",S:"yyyy'-'MM'-'dd'T'HH':'mm':'ss"}}},messages:{}},t.cultures["default"].calendar=t.cultures["default"].calendars.standard,t.cultures.en=t.cultures["default"],t.cultureSelector="en",n=/^0x[a-f0-9]+$/i,a=/^[+\-]?infinity$/i,s=/^[+\-]?\d*\.?\d*(e[+\-]?\d+)?$/,u=/^\s+|\s+$/g,l=function(e,r){if(e.indexOf)return e.indexOf(r);for(var t=0,n=e.length;n>t;t++)if(e[t]===r)return t;return-1},i=function(e,r){return e.substr(e.length-r.length)===r},c=function(){var e,t,n,a,s,u,l=arguments[0]||{},i=1,p=arguments.length,h=!1;for("boolean"==typeof l&&(h=l,l=arguments[1]||{},i=2),"object"==typeof l||f(l)||(l={});p>i;i++)if(null!=(e=arguments[i]))for(t in e)n=l[t],a=e[t],l!==a&&(h&&a&&(d(a)||(s=o(a)))?(s?(s=!1,u=n&&o(n)?n:[]):u=n&&d(n)?n:{},l[t]=c(h,u,a)):a!==r&&(l[t]=a));return l},o=Array.isArray||function(e){return"[object Array]"===Object.prototype.toString.call(e)},f=function(e){return"[object Function]"===Object.prototype.toString.call(e)},d=function(e){return"[object Object]"===Object.prototype.toString.call(e)},p=function(e,r){return 0===e.indexOf(r)},h=function(e){return(e+"").replace(u,"")},g=function(e){return isNaN(e)?0/0:Math[0>e?"ceil":"floor"](e)},b=function(e,r,t){var n;for(n=e.length;r>n;n+=1)e=t?"0"+e:e+"0";return e},m=function(e,r){for(var t=0,n=!1,a=0,s=e.length;s>a;a++){var u=e.charAt(a);switch(u){case"'":n?r.push("'"):t++,n=!1;break;case"\\":n&&r.push("\\"),n=!n;break;default:r.push(u),n=!1}}return t},y=function(e,r){r=r||"F";var t,n=e.patterns,a=r.length;if(1===a){if(t=n[r],!t)throw"Invalid date format string '"+r+"'.";r=t}else 2===a&&"%"===r.charAt(0)&&(r=r.charAt(1));return r},M=function(e,r,t){function n(e,r){var t,n=e+"";return r>1&&r>n.length?(t=v[r-2]+n,t.substr(t.length-r,r)):t=n}function a(){return h||g?h:(h=A.test(r),g=!0,h)}function s(e,r){if(b)return b[r];switch(r){case 0:return e.getFullYear();case 1:return e.getMonth();case 2:return e.getDate();default:throw"Invalid part value "+r}}var u,l=t.calendar,i=l.convert;if(!r||!r.length||"i"===r){if(t&&t.name.length)if(i)u=M(e,l.patterns.F,t);else{var c=new Date(e.getTime()),o=z(e,l.eras);c.setFullYear(F(e,l,o)),u=c.toLocaleString()}else u=""+e;return u}var f=l.eras,d="s"===r;r=y(l,r),u=[];var p,h,g,b,v=["0","00","000"],A=/([^d]|^)(d|dd)([^d]|$)/g,x=0,I=k();for(!d&&i&&(b=i.fromGregorian(e));;){var S=I.lastIndex,w=I.exec(r),C=r.slice(S,w?w.index:r.length);if(x+=m(C,u),!w)break;if(x%2)u.push(w[0]);else{var D=w[0],H=D.length;switch(D){case"ddd":case"dddd":var O=3===H?l.days.namesAbbr:l.days.names;u.push(O[e.getDay()]);break;case"d":case"dd":h=!0,u.push(n(s(e,2),H));break;case"MMM":case"MMMM":var N=s(e,1);u.push(l.monthsGenitive&&a()?l.monthsGenitive[3===H?"namesAbbr":"names"][N]:l.months[3===H?"namesAbbr":"names"][N]);break;case"M":case"MM":u.push(n(s(e,1)+1,H));break;case"y":case"yy":case"yyyy":N=b?b[0]:F(e,l,z(e,f),d),4>H&&(N%=100),u.push(n(N,H));break;case"h":case"hh":p=e.getHours()%12,0===p&&(p=12),u.push(n(p,H));break;case"H":case"HH":u.push(n(e.getHours(),H));break;case"m":case"mm":u.push(n(e.getMinutes(),H));break;case"s":case"ss":u.push(n(e.getSeconds(),H));break;case"t":case"tt":N=12>e.getHours()?l.AM?l.AM[0]:" ":l.PM?l.PM[0]:" ",u.push(1===H?N.charAt(0):N);break;case"f":case"ff":case"fff":u.push(n(e.getMilliseconds(),3).substr(0,H));break;case"z":case"zz":p=e.getTimezoneOffset()/60,u.push((0>=p?"+":"-")+n(Math.floor(Math.abs(p)),H));break;case"zzz":p=e.getTimezoneOffset()/60,u.push((0>=p?"+":"-")+n(Math.floor(Math.abs(p)),2)+":"+n(Math.abs(e.getTimezoneOffset()%60),2));break;case"g":case"gg":l.eras&&u.push(l.eras[z(e,f)].name);break;case"/":u.push(l["/"]);break;default:throw"Invalid date format pattern '"+D+"'."}}}return u.join("")},function(){var e;e=function(e,r,t){var n=t.groupSizes,a=n[0],s=1,u=Math.pow(10,r),l=Math.round(e*u)/u;isFinite(l)||(l=e),e=l;var i=e+"",c="",o=i.split(/e/i),f=o.length>1?parseInt(o[1],10):0;i=o[0],o=i.split("."),i=o[0],c=o.length>1?o[1]:"",f>0?(c=b(c,f,!1),i+=c.slice(0,f),c=c.substr(f)):0>f&&(f=-f,i=b(i,f+1,!0),c=i.slice(-f,i.length)+c,i=i.slice(0,-f)),c=r>0?t["."]+(c.length>r?c.slice(0,r):b(c,r)):"";for(var d=i.length-1,p=t[","],h="";d>=0;){if(0===a||a>d)return i.slice(0,d+1)+(h.length?p+h+c:c);h=i.slice(d-a+1,d+1)+(h.length?p+h:""),d-=a,n.length>s&&(a=n[s],s++)}return i.slice(0,d+1)+p+h+c},v=function(r,t,n){if(!isFinite(r))return 1/0===r?n.numberFormat.positiveInfinity:r===-1/0?n.numberFormat.negativeInfinity:n.numberFormat.NaN;if(!t||"i"===t)return n.name.length?r.toLocaleString():""+r;t=t||"D";var a,s=n.numberFormat,u=Math.abs(r),l=-1;t.length>1&&(l=parseInt(t.slice(1),10));var i,c=t.charAt(0).toUpperCase();switch(c){case"D":a="n",u=g(u),-1!==l&&(u=b(""+u,l,!0)),0>r&&(u="-"+u);break;case"N":i=s;case"C":i=i||s.currency;case"P":i=i||s.percent,a=0>r?i.pattern[0]:i.pattern[1]||"n",-1===l&&(l=i.decimals),u=e(u*("P"===c?100:1),l,i);break;default:throw"Bad number format specifier: "+c}for(var o=/n|\$|-|%/g,f="";;){var d=o.lastIndex,p=o.exec(a);if(f+=a.slice(d,p?p.index:a.length),!p)break;switch(p[0]){case"n":f+=u;break;case"$":f+=s.currency.symbol;break;case"-":/[1-9]/.test(u)&&(f+=s["-"]);break;case"%":f+=s.percent.symbol}}return f}}(),k=function(){return/\/|dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|y|hh|h|HH|H|mm|m|ss|s|tt|t|fff|ff|f|zzz|zz|z|gg|g/g},z=function(e,r){if(!r)return 0;for(var t,n=e.getTime(),a=0,s=r.length;s>a;a++)if(t=r[a].start,null===t||n>=t)return a;return 0},F=function(e,r,t,n){var a=e.getFullYear();return!n&&r.eras&&(a-=r.eras[t].offset),a},function(){var e,r,t,n,a,s,u;e=function(e,r){if(100>r){var t=new Date,n=z(t),a=F(t,e,n),s=e.twoDigitYearMax;s="string"==typeof s?(new Date).getFullYear()%100+parseInt(s,10):s,r+=a-a%100,r>s&&(r-=100)}return r},r=function(e,r,t){var n,a=e.days,i=e._upperDays;return i||(e._upperDays=i=[u(a.names),u(a.namesAbbr),u(a.namesShort)]),r=s(r),t?(n=l(i[1],r),-1===n&&(n=l(i[2],r))):n=l(i[0],r),n},t=function(e,r,t){var n=e.months,a=e.monthsGenitive||e.months,i=e._upperMonths,c=e._upperMonthsGen;i||(e._upperMonths=i=[u(n.names),u(n.namesAbbr)],e._upperMonthsGen=c=[u(a.names),u(a.namesAbbr)]),r=s(r);var o=l(t?i[1]:i[0],r);return 0>o&&(o=l(t?c[1]:c[0],r)),o},n=function(e,r){var t=e._parseRegExp;if(t){var n=t[r];if(n)return n}else e._parseRegExp=t={};for(var a,s=y(e,r).replace(/([\^\$\.\*\+\?\|\[\]\(\)\{\}])/g,"\\\\$1"),u=["^"],l=[],i=0,c=0,o=k();null!==(a=o.exec(s));){var f=s.slice(i,a.index);if(i=o.lastIndex,c+=m(f,u),c%2)u.push(a[0]);else{var d,p=a[0],h=p.length;switch(p){case"dddd":case"ddd":case"MMMM":case"MMM":case"gg":case"g":d="(\\D+)";break;case"tt":case"t":d="(\\D*)";break;case"yyyy":case"fff":case"ff":case"f":d="(\\d{"+h+"})";break;case"dd":case"d":case"MM":case"M":case"yy":case"y":case"HH":case"H":case"hh":case"h":case"mm":case"m":case"ss":case"s":d="(\\d\\d?)";break;case"zzz":d="([+-]?\\d\\d?:\\d{2})";break;case"zz":case"z":d="([+-]?\\d\\d?)";break;case"/":d="(\\/)";break;default:throw"Invalid date format pattern '"+p+"'."}d&&u.push(d),l.push(a[0])}}m(s.slice(i),u),u.push("$");var g=u.join("").replace(/\s+/g,"\\s+"),b={regExp:g,groups:l};return t[r]=b},a=function(e,r,t){return r>e||e>t},s=function(e){return e.split("\u00a0").join(" ").toUpperCase()},u=function(e){for(var r=[],t=0,n=e.length;n>t;t++)r[t]=s(e[t]);return r},A=function(s,u,l){s=h(s);var i=l.calendar,c=n(i,u),o=RegExp(c.regExp).exec(s);if(null===o)return null;for(var f,d=c.groups,g=null,b=null,m=null,y=null,M=null,v=0,k=0,z=0,F=0,A=null,x=!1,I=0,S=d.length;S>I;I++){var w=o[I+1];if(w){var C=d[I],D=C.length,H=parseInt(w,10);switch(C){case"dd":case"d":if(y=H,a(y,1,31))return null;break;case"MMM":case"MMMM":if(m=t(i,w,3===D),a(m,0,11))return null;break;case"M":case"MM":if(m=H-1,a(m,0,11))return null;break;case"y":case"yy":case"yyyy":if(b=4>D?e(i,H):H,a(b,0,9999))return null;break;case"h":case"hh":if(v=H,12===v&&(v=0),a(v,0,11))return null;break;case"H":case"HH":if(v=H,a(v,0,23))return null;break;case"m":case"mm":if(k=H,a(k,0,59))return null;break;case"s":case"ss":if(z=H,a(z,0,59))return null;break;case"tt":case"t":if(x=i.PM&&(w===i.PM[0]||w===i.PM[1]||w===i.PM[2]),!x&&(!i.AM||w!==i.AM[0]&&w!==i.AM[1]&&w!==i.AM[2]))return null;break;case"f":case"ff":case"fff":if(F=H*Math.pow(10,3-D),a(F,0,999))return null;break;case"ddd":case"dddd":if(M=r(i,w,3===D),a(M,0,6))return null;break;case"zzz":var O=w.split(/:/);if(2!==O.length)return null;if(f=parseInt(O[0],10),a(f,-12,13))return null;var N=parseInt(O[1],10);if(a(N,0,59))return null;A=60*f+(p(w,"-")?-N:N);break;case"z":case"zz":if(f=H,a(f,-12,13))return null;A=60*f;break;case"g":case"gg":var T=w;if(!T||!i.eras)return null;T=h(T.toLowerCase());for(var j=0,$=i.eras.length;$>j;j++)if(T===i.eras[j].name.toLowerCase()){g=j;break}if(null===g)return null}}}var P,G=new Date,E=i.convert;if(P=E?E.fromGregorian(G)[0]:G.getFullYear(),null===b?b=P:i.eras&&(b+=i.eras[g||0].offset),null===m&&(m=0),null===y&&(y=1),E){if(G=E.toGregorian(b,m,y),null===G)return null}else{if(G.setFullYear(b,m,y),G.getDate()!==y)return null;if(null!==M&&G.getDay()!==M)return null}if(x&&12>v&&(v+=12),G.setHours(v,k,z,F),null!==A){var Y=G.getMinutes()-(A+G.getTimezoneOffset());G.setHours(G.getHours()+parseInt(Y/60,10),Y%60)}return G}}(),x=function(e,r,t){var n,a=r["-"],s=r["+"];switch(t){case"n -":a=" "+a,s=" "+s;case"n-":i(e,a)?n=["-",e.substr(0,e.length-a.length)]:i(e,s)&&(n=["+",e.substr(0,e.length-s.length)]);break;case"- n":a+=" ",s+=" ";case"-n":p(e,a)?n=["-",e.substr(a.length)]:p(e,s)&&(n=["+",e.substr(s.length)]);break;case"(n)":p(e,"(")&&i(e,")")&&(n=["-",e.substr(1,e.length-2)])}return n||["",e]},t.prototype.findClosestCulture=function(e){return t.findClosestCulture.call(this,e)},t.prototype.format=function(e,r,n){return t.format.call(this,e,r,n)},t.prototype.localize=function(e,r){return t.localize.call(this,e,r)},t.prototype.parseInt=function(e,r,n){return t.parseInt.call(this,e,r,n)},t.prototype.parseFloat=function(e,r,n){return t.parseFloat.call(this,e,r,n)},t.prototype.culture=function(e){return t.culture.call(this,e)},t.addCultureInfo=function(e,r,t){var n={},a=!1;"string"!=typeof e?(t=e,e=this.culture().name,n=this.cultures[e]):"string"!=typeof r?(t=r,a=null==this.cultures[e],n=this.cultures[e]||this.cultures["default"]):(a=!0,n=this.cultures[r]),this.cultures[e]=c(!0,{},n,t),a&&(this.cultures[e].calendar=this.cultures[e].calendars.standard)},t.findClosestCulture=function(e){var r;if(!e)return this.findClosestCulture(this.cultureSelector)||this.cultures["default"];if("string"==typeof e&&(e=e.split(",")),o(e)){var t,n,a=this.cultures,s=e,u=s.length,l=[];for(n=0;u>n;n++){e=h(s[n]);var i,c=e.split(";");t=h(c[0]),1===c.length?i=1:(e=h(c[1]),0===e.indexOf("q=")?(e=e.substr(2),i=parseFloat(e),i=isNaN(i)?0:i):i=1),l.push({lang:t,pri:i})}for(l.sort(function(e,r){return e.pri<r.pri?1:e.pri>r.pri?-1:0}),n=0;u>n;n++)if(t=l[n].lang,r=a[t])return r;for(n=0;u>n;n++)for(t=l[n].lang;;){var f=t.lastIndexOf("-");if(-1===f)break;if(t=t.substr(0,f),r=a[t])return r}for(n=0;u>n;n++){t=l[n].lang;for(var d in a){var p=a[d];if(p.language===t)return p}}}else if("object"==typeof e)return e;return r||null},t.format=function(e,r,t){var n=this.findClosestCulture(t);return e instanceof Date?e=M(e,r,n):"number"==typeof e&&(e=v(e,r,n)),e},t.localize=function(e,r){return this.findClosestCulture(r).messages[e]||this.cultures["default"].messages[e]},t.parseDate=function(e,r,t){t=this.findClosestCulture(t);var n,a,s;if(r){if("string"==typeof r&&(r=[r]),r.length)for(var u=0,l=r.length;l>u;u++){var i=r[u];if(i&&(n=A(e,i,t)))break}}else{s=t.calendar.patterns;for(a in s)if(n=A(e,s[a],t))break}return n||null},t.parseInt=function(e,r,n){return g(t.parseFloat(e,r,n))},t.parseFloat=function(e,r,t){"number"!=typeof r&&(t=r,r=10);var u=this.findClosestCulture(t),l=0/0,i=u.numberFormat;if(e.indexOf(u.numberFormat.currency.symbol)>-1&&(e=e.replace(u.numberFormat.currency.symbol,""),e=e.replace(u.numberFormat.currency["."],u.numberFormat["."])),e.indexOf(u.numberFormat.percent.symbol)>-1&&(e=e.replace(u.numberFormat.percent.symbol,"")),e=e.replace(/ /g,""),a.test(e))l=parseFloat(e);else if(!r&&n.test(e))l=parseInt(e,16);else{var c=x(e,i,i.pattern[0]),o=c[0],f=c[1];""===o&&"(n)"!==i.pattern[0]&&(c=x(e,i,"(n)"),o=c[0],f=c[1]),""===o&&"-n"!==i.pattern[0]&&(c=x(e,i,"-n"),o=c[0],f=c[1]),o=o||"+";var d,p,h=f.indexOf("e");0>h&&(h=f.indexOf("E")),0>h?(p=f,d=null):(p=f.substr(0,h),d=f.substr(h+1));var g,b,m=i["."],y=p.indexOf(m);0>y?(g=p,b=null):(g=p.substr(0,y),b=p.substr(y+m.length));var M=i[","];g=g.split(M).join("");var v=M.replace(/\u00A0/g," ");M!==v&&(g=g.split(v).join(""));var k=o+g;if(null!==b&&(k+="."+b),null!==d){var z=x(d,i,"-n");k+="e"+(z[0]||"+")+z[1]}s.test(k)&&(l=parseFloat(k))}return l},t.culture=function(e){return e!==r&&(this.cultureSelector=e),this.findClosestCulture(e)||this.cultures["default"]}; return Globalize;}(this));
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -10531,7 +10538,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -10545,7 +10552,7 @@ var playground =
 
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -10688,7 +10695,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -10772,7 +10779,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10834,7 +10841,7 @@ var playground =
 
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -10847,8 +10854,8 @@ var playground =
 	var ComponentOptions_1 = __webpack_require__(52);
 	var LocalStorageUtils_1 = __webpack_require__(21);
 	var QueryEvents_1 = __webpack_require__(23);
-	var ResultListEvents_1 = __webpack_require__(76);
-	var DebugEvents_1 = __webpack_require__(77);
+	var ResultListEvents_1 = __webpack_require__(77);
+	var DebugEvents_1 = __webpack_require__(78);
 	var Dom_1 = __webpack_require__(3);
 	var StringUtils_1 = __webpack_require__(55);
 	var SearchEndpoint_1 = __webpack_require__(43);
@@ -10858,7 +10865,7 @@ var playground =
 	var BaseComponent_1 = __webpack_require__(13);
 	var ExternalModulesShim_1 = __webpack_require__(28);
 	var Globalize = __webpack_require__(69);
-	var KeyboardUtils_1 = __webpack_require__(78);
+	var KeyboardUtils_1 = __webpack_require__(79);
 	var InitializationEvents_1 = __webpack_require__(57);
 	var Debug = (function (_super) {
 	    __extends(Debug, _super);
@@ -11527,7 +11534,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -11543,7 +11550,7 @@ var playground =
 
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -11557,7 +11564,7 @@ var playground =
 
 
 /***/ },
-/* 78 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -11652,19 +11659,19 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 79 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;!function(){"use strict";function t(e,o){function i(t,e){return function(){return t.apply(e,arguments)}}var r;if(o=o||{},this.trackingClick=!1,this.trackingClickStart=0,this.targetElement=null,this.touchStartX=0,this.touchStartY=0,this.lastTouchIdentifier=0,this.touchBoundary=o.touchBoundary||10,this.layer=e,this.tapDelay=o.tapDelay||200,this.tapTimeout=o.tapTimeout||700,!t.notNeeded(e)){for(var a=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"],c=this,s=0,u=a.length;u>s;s++)c[a[s]]=i(c[a[s]],c);n&&(e.addEventListener("mouseover",this.onMouse,!0),e.addEventListener("mousedown",this.onMouse,!0),e.addEventListener("mouseup",this.onMouse,!0)),e.addEventListener("click",this.onClick,!0),e.addEventListener("touchstart",this.onTouchStart,!1),e.addEventListener("touchmove",this.onTouchMove,!1),e.addEventListener("touchend",this.onTouchEnd,!1),e.addEventListener("touchcancel",this.onTouchCancel,!1),Event.prototype.stopImmediatePropagation||(e.removeEventListener=function(t,n,o){var i=Node.prototype.removeEventListener;"click"===t?i.call(e,t,n.hijacked||n,o):i.call(e,t,n,o)},e.addEventListener=function(t,n,o){var i=Node.prototype.addEventListener;"click"===t?i.call(e,t,n.hijacked||(n.hijacked=function(t){t.propagationStopped||n(t)}),o):i.call(e,t,n,o)}),"function"==typeof e.onclick&&(r=e.onclick,e.addEventListener("click",function(t){r(t)},!1),e.onclick=null)}}var e=navigator.userAgent.indexOf("Windows Phone")>=0,n=navigator.userAgent.indexOf("Android")>0&&!e,o=/iP(ad|hone|od)/.test(navigator.userAgent)&&!e,i=o&&/OS 4_\d(_\d)?/.test(navigator.userAgent),r=o&&/OS [6-7]_\d/.test(navigator.userAgent),a=navigator.userAgent.indexOf("BB10")>0;t.prototype.needsClick=function(t){switch(t.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(t.disabled)return!0;break;case"input":if(o&&"file"===t.type||t.disabled)return!0;break;case"label":case"iframe":case"video":return!0}return/\bneedsclick\b/.test(t.className)},t.prototype.needsFocus=function(t){switch(t.nodeName.toLowerCase()){case"textarea":return!0;case"select":return!n;case"input":switch(t.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return!1}return!t.disabled&&!t.readOnly;default:return/\bneedsfocus\b/.test(t.className)}},t.prototype.sendClick=function(t,e){var n,o;document.activeElement&&document.activeElement!==t&&document.activeElement.blur(),o=e.changedTouches[0],n=document.createEvent("MouseEvents"),n.initMouseEvent(this.determineEventType(t),!0,!0,window,1,o.screenX,o.screenY,o.clientX,o.clientY,!1,!1,!1,!1,0,null),n.forwardedTouchEvent=!0,t.dispatchEvent(n)},t.prototype.determineEventType=function(t){return n&&"select"===t.tagName.toLowerCase()?"mousedown":"click"},t.prototype.focus=function(t){var e;o&&t.setSelectionRange&&0!==t.type.indexOf("date")&&"time"!==t.type&&"month"!==t.type?(e=t.value.length,t.setSelectionRange(e,e)):t.focus()},t.prototype.updateScrollParent=function(t){var e,n;if(e=t.fastClickScrollParent,!e||!e.contains(t)){n=t;do{if(n.scrollHeight>n.offsetHeight){e=n,t.fastClickScrollParent=n;break}n=n.parentElement}while(n)}e&&(e.fastClickLastScrollTop=e.scrollTop)},t.prototype.getTargetElementFromEventTarget=function(t){return t.nodeType===Node.TEXT_NODE?t.parentNode:t},t.prototype.onTouchStart=function(t){var e,n,r;if(t.targetTouches.length>1)return!0;if(e=this.getTargetElementFromEventTarget(t.target),n=t.targetTouches[0],o){if(r=window.getSelection(),r.rangeCount&&!r.isCollapsed)return!0;if(!i){if(n.identifier&&n.identifier===this.lastTouchIdentifier)return t.preventDefault(),!1;this.lastTouchIdentifier=n.identifier,this.updateScrollParent(e)}}return this.trackingClick=!0,this.trackingClickStart=t.timeStamp,this.targetElement=e,this.touchStartX=n.pageX,this.touchStartY=n.pageY,t.timeStamp-this.lastClickTime<this.tapDelay&&t.preventDefault(),!0},t.prototype.touchHasMoved=function(t){var e=t.changedTouches[0],n=this.touchBoundary;return Math.abs(e.pageX-this.touchStartX)>n||Math.abs(e.pageY-this.touchStartY)>n?!0:!1},t.prototype.onTouchMove=function(t){return this.trackingClick?((this.targetElement!==this.getTargetElementFromEventTarget(t.target)||this.touchHasMoved(t))&&(this.trackingClick=!1,this.targetElement=null),!0):!0},t.prototype.findControl=function(t){return void 0!==t.control?t.control:t.htmlFor?document.getElementById(t.htmlFor):t.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")},t.prototype.onTouchEnd=function(t){var e,a,c,s,u,l=this.targetElement;if(!this.trackingClick)return!0;if(t.timeStamp-this.lastClickTime<this.tapDelay)return this.cancelNextClick=!0,!0;if(t.timeStamp-this.trackingClickStart>this.tapTimeout)return!0;if(this.cancelNextClick=!1,this.lastClickTime=t.timeStamp,a=this.trackingClickStart,this.trackingClick=!1,this.trackingClickStart=0,r&&(u=t.changedTouches[0],l=document.elementFromPoint(u.pageX-window.pageXOffset,u.pageY-window.pageYOffset)||l,l.fastClickScrollParent=this.targetElement.fastClickScrollParent),c=l.tagName.toLowerCase(),"label"===c){if(e=this.findControl(l)){if(this.focus(l),n)return!1;l=e}}else if(this.needsFocus(l))return t.timeStamp-a>100||o&&window.top!==window&&"input"===c?(this.targetElement=null,!1):(this.focus(l),this.sendClick(l,t),o&&"select"===c||(this.targetElement=null,t.preventDefault()),!1);return o&&!i&&(s=l.fastClickScrollParent,s&&s.fastClickLastScrollTop!==s.scrollTop)?!0:(this.needsClick(l)||(t.preventDefault(),this.sendClick(l,t)),!1)},t.prototype.onTouchCancel=function(){this.trackingClick=!1,this.targetElement=null},t.prototype.onMouse=function(t){return this.targetElement?t.forwardedTouchEvent?!0:t.cancelable?!this.needsClick(this.targetElement)||this.cancelNextClick?(t.stopImmediatePropagation?t.stopImmediatePropagation():t.propagationStopped=!0,t.stopPropagation(),t.preventDefault(),!1):!0:!0:!0},t.prototype.onClick=function(t){var e;return this.trackingClick?(this.targetElement=null,this.trackingClick=!1,!0):"submit"===t.target.type&&0===t.detail?!0:(e=this.onMouse(t),e||(this.targetElement=null),e)},t.prototype.destroy=function(){var t=this.layer;n&&(t.removeEventListener("mouseover",this.onMouse,!0),t.removeEventListener("mousedown",this.onMouse,!0),t.removeEventListener("mouseup",this.onMouse,!0)),t.removeEventListener("click",this.onClick,!0),t.removeEventListener("touchstart",this.onTouchStart,!1),t.removeEventListener("touchmove",this.onTouchMove,!1),t.removeEventListener("touchend",this.onTouchEnd,!1),t.removeEventListener("touchcancel",this.onTouchCancel,!1)},t.notNeeded=function(t){var e,o,i,r;if("undefined"==typeof window.ontouchstart)return!0;if(o=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1]){if(!n)return!0;if(e=document.querySelector("meta[name=viewport]")){if(-1!==e.content.indexOf("user-scalable=no"))return!0;if(o>31&&document.documentElement.scrollWidth<=window.outerWidth)return!0}}if(a&&(i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/),i[1]>=10&&i[2]>=3&&(e=document.querySelector("meta[name=viewport]")))){if(-1!==e.content.indexOf("user-scalable=no"))return!0;if(document.documentElement.scrollWidth<=window.outerWidth)return!0}return"none"===t.style.msTouchAction||"manipulation"===t.style.touchAction?!0:(r=+(/Firefox\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1],r>=27&&(e=document.querySelector("meta[name=viewport]"),e&&(-1!==e.content.indexOf("user-scalable=no")||document.documentElement.scrollWidth<=window.outerWidth))?!0:"none"===t.style.touchAction||"manipulation"===t.style.touchAction?!0:!1)},t.attach=function(e,n){return new t(e,n)}, true?!(__WEBPACK_AMD_DEFINE_RESULT__ = function(){return t}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):"undefined"!=typeof module&&module.exports?(module.exports=t.attach,module.exports.FastClick=t):window.FastClick=t}();
 
 /***/ },
-/* 80 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function(e){var t=function(){"use strict";var e="s",n=2011,r=function(e){var t=-e.getTimezoneOffset();return t!==null?t:0},i=function(e,t,n){var r=new Date;return e!==undefined&&r.setFullYear(e),r.setDate(n),r.setMonth(t),r},s=function(e){return r(i(e,0,2))},o=function(e){return r(i(e,5,2))},u=function(e){var t=e.getMonth()>7?o(e.getFullYear()):s(e.getFullYear()),n=r(e);return t-n!==0},a=function(){var t=s(n),r=o(n),i=t-r;return i<0?t+",1":i>0?r+",1,"+e:t+",0"},f=function(){var e=a();return new t.TimeZone(t.olson.timezones[e])},l=function(e){var t=new Date(2010,6,15,1,0,0,0),n={"America/Denver":new Date(2011,2,13,3,0,0,0),"America/Mazatlan":new Date(2011,3,3,3,0,0,0),"America/Chicago":new Date(2011,2,13,3,0,0,0),"America/Mexico_City":new Date(2011,3,3,3,0,0,0),"America/Asuncion":new Date(2012,9,7,3,0,0,0),"America/Santiago":new Date(2012,9,3,3,0,0,0),"America/Campo_Grande":new Date(2012,9,21,5,0,0,0),"America/Montevideo":new Date(2011,9,2,3,0,0,0),"America/Sao_Paulo":new Date(2011,9,16,5,0,0,0),"America/Los_Angeles":new Date(2011,2,13,8,0,0,0),"America/Santa_Isabel":new Date(2011,3,5,8,0,0,0),"America/Havana":new Date(2012,2,10,2,0,0,0),"America/New_York":new Date(2012,2,10,7,0,0,0),"Asia/Beirut":new Date(2011,2,27,1,0,0,0),"Europe/Helsinki":new Date(2011,2,27,4,0,0,0),"Europe/Istanbul":new Date(2011,2,28,5,0,0,0),"Asia/Damascus":new Date(2011,3,1,2,0,0,0),"Asia/Jerusalem":new Date(2011,3,1,6,0,0,0),"Asia/Gaza":new Date(2009,2,28,0,30,0,0),"Africa/Cairo":new Date(2009,3,25,0,30,0,0),"Pacific/Auckland":new Date(2011,8,26,7,0,0,0),"Pacific/Fiji":new Date(2010,10,29,23,0,0,0),"America/Halifax":new Date(2011,2,13,6,0,0,0),"America/Goose_Bay":new Date(2011,2,13,2,1,0,0),"America/Miquelon":new Date(2011,2,13,5,0,0,0),"America/Godthab":new Date(2011,2,27,1,0,0,0),"Europe/Moscow":t,"Asia/Yekaterinburg":t,"Asia/Omsk":t,"Asia/Krasnoyarsk":t,"Asia/Irkutsk":t,"Asia/Yakutsk":t,"Asia/Vladivostok":t,"Asia/Kamchatka":t,"Europe/Minsk":t,"Pacific/Apia":new Date(2010,10,1,1,0,0,0),"Australia/Perth":new Date(2008,10,1,1,0,0,0)};return n[e]};return{determine:f,date_is_dst:u,dst_start_for:l}}();t.TimeZone=function(e){"use strict";var n={"America/Denver":["America/Denver","America/Mazatlan"],"America/Chicago":["America/Chicago","America/Mexico_City"],"America/Santiago":["America/Santiago","America/Asuncion","America/Campo_Grande"],"America/Montevideo":["America/Montevideo","America/Sao_Paulo"],"Asia/Beirut":["Asia/Beirut","Europe/Helsinki","Europe/Istanbul","Asia/Damascus","Asia/Jerusalem","Asia/Gaza"],"Pacific/Auckland":["Pacific/Auckland","Pacific/Fiji"],"America/Los_Angeles":["America/Los_Angeles","America/Santa_Isabel"],"America/New_York":["America/Havana","America/New_York"],"America/Halifax":["America/Goose_Bay","America/Halifax"],"America/Godthab":["America/Miquelon","America/Godthab"],"Asia/Dubai":["Europe/Moscow"],"Asia/Dhaka":["Asia/Yekaterinburg"],"Asia/Jakarta":["Asia/Omsk"],"Asia/Shanghai":["Asia/Krasnoyarsk","Australia/Perth"],"Asia/Tokyo":["Asia/Irkutsk"],"Australia/Brisbane":["Asia/Yakutsk"],"Pacific/Noumea":["Asia/Vladivostok"],"Pacific/Tarawa":["Asia/Kamchatka"],"Pacific/Tongatapu":["Pacific/Apia"],"Africa/Johannesburg":["Asia/Gaza","Africa/Cairo"],"Asia/Baghdad":["Europe/Minsk"]},r=e,i=function(){var e=n[r],i=e.length,s=0,o=e[0];for(;s<i;s+=1){o=e[s];if(t.date_is_dst(t.dst_start_for(o))){r=o;return}}},s=function(){return typeof n[r]!="undefined"};return s()&&i(),{name:function(){return r}}},t.olson={},t.olson.timezones={"-720,0":"Pacific/Majuro","-660,0":"Pacific/Pago_Pago","-600,1":"America/Adak","-600,0":"Pacific/Honolulu","-570,0":"Pacific/Marquesas","-540,0":"Pacific/Gambier","-540,1":"America/Anchorage","-480,1":"America/Los_Angeles","-480,0":"Pacific/Pitcairn","-420,0":"America/Phoenix","-420,1":"America/Denver","-360,0":"America/Guatemala","-360,1":"America/Chicago","-360,1,s":"Pacific/Easter","-300,0":"America/Bogota","-300,1":"America/New_York","-270,0":"America/Caracas","-240,1":"America/Halifax","-240,0":"America/Santo_Domingo","-240,1,s":"America/Santiago","-210,1":"America/St_Johns","-180,1":"America/Godthab","-180,0":"America/Argentina/Buenos_Aires","-180,1,s":"America/Montevideo","-120,0":"America/Noronha","-120,1":"America/Noronha","-60,1":"Atlantic/Azores","-60,0":"Atlantic/Cape_Verde","0,0":"UTC","0,1":"Europe/London","60,1":"Europe/Berlin","60,0":"Africa/Lagos","60,1,s":"Africa/Windhoek","120,1":"Asia/Beirut","120,0":"Africa/Johannesburg","180,0":"Asia/Baghdad","180,1":"Europe/Moscow","210,1":"Asia/Tehran","240,0":"Asia/Dubai","240,1":"Asia/Baku","270,0":"Asia/Kabul","300,1":"Asia/Yekaterinburg","300,0":"Asia/Karachi","330,0":"Asia/Kolkata","345,0":"Asia/Kathmandu","360,0":"Asia/Dhaka","360,1":"Asia/Omsk","390,0":"Asia/Rangoon","420,1":"Asia/Krasnoyarsk","420,0":"Asia/Jakarta","480,0":"Asia/Shanghai","480,1":"Asia/Irkutsk","525,0":"Australia/Eucla","525,1,s":"Australia/Eucla","540,1":"Asia/Yakutsk","540,0":"Asia/Tokyo","570,0":"Australia/Darwin","570,1,s":"Australia/Adelaide","600,0":"Australia/Brisbane","600,1":"Asia/Vladivostok","600,1,s":"Australia/Sydney","630,1,s":"Australia/Lord_Howe","660,1":"Asia/Kamchatka","660,0":"Pacific/Noumea","690,0":"Pacific/Norfolk","720,1,s":"Pacific/Auckland","720,0":"Pacific/Tarawa","765,1,s":"Pacific/Chatham","780,0":"Pacific/Tongatapu","780,1,s":"Pacific/Apia","840,0":"Pacific/Kiritimati"}, true?exports.jstz=t:e.jstz=t})(this);
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -11724,7 +11731,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -11732,7 +11739,7 @@ var playground =
 	var Assert_1 = __webpack_require__(8);
 	var QueryController_1 = __webpack_require__(16);
 	var QueryStateModel_1 = __webpack_require__(11);
-	var Analytics_1 = __webpack_require__(83);
+	var Analytics_1 = __webpack_require__(84);
 	var InitializationEvents_1 = __webpack_require__(57);
 	var Dom_1 = __webpack_require__(3);
 	var Component_1 = __webpack_require__(10);
@@ -12045,7 +12052,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 83 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -12056,7 +12063,7 @@ var playground =
 	};
 	var Component_1 = __webpack_require__(10);
 	var ComponentOptions_1 = __webpack_require__(52);
-	var AnalyticsEndpoint_1 = __webpack_require__(84);
+	var AnalyticsEndpoint_1 = __webpack_require__(85);
 	var SearchEndpoint_1 = __webpack_require__(43);
 	var Assert_1 = __webpack_require__(8);
 	var QueryEvents_1 = __webpack_require__(23);
@@ -12064,13 +12071,13 @@ var playground =
 	var Dom_1 = __webpack_require__(3);
 	var Model_1 = __webpack_require__(12);
 	var Utils_1 = __webpack_require__(6);
-	var NoopAnalyticsClient_1 = __webpack_require__(74);
-	var LiveAnalyticsClient_1 = __webpack_require__(86);
-	var MultiAnalyticsClient_1 = __webpack_require__(91);
+	var NoopAnalyticsClient_1 = __webpack_require__(75);
+	var LiveAnalyticsClient_1 = __webpack_require__(87);
+	var MultiAnalyticsClient_1 = __webpack_require__(92);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var SearchInterface_1 = __webpack_require__(42);
-	var Recommendation_1 = __webpack_require__(92);
-	var RecommendationAnalyticsClient_1 = __webpack_require__(144);
+	var Recommendation_1 = __webpack_require__(93);
+	var RecommendationAnalyticsClient_1 = __webpack_require__(145);
 	/**
 	 * This component logs all user actions performed in the search interface and sends them to a REST web service exposed through the Coveo Cloud platform.<br/>
 	 * You can use data to evaluate how users are interacting with the search interface, improve relevance and produce analytics dashboards in the Coveo platform.
@@ -12366,7 +12373,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 84 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -12374,7 +12381,7 @@ var playground =
 	var EndpointCaller_1 = __webpack_require__(44);
 	var Assert_1 = __webpack_require__(8);
 	var QueryUtils_1 = __webpack_require__(20);
-	var CookieUtils_1 = __webpack_require__(85);
+	var CookieUtils_1 = __webpack_require__(86);
 	var es6_promise_1 = __webpack_require__(25);
 	var AnalyticsEndpoint = (function () {
 	    function AnalyticsEndpoint(options) {
@@ -12508,7 +12515,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -12578,20 +12585,20 @@ var playground =
 
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var DeviceUtils_1 = __webpack_require__(46);
-	var PendingSearchEvent_1 = __webpack_require__(87);
-	var PendingSearchAsYouTypeSearchEvent_1 = __webpack_require__(90);
+	var PendingSearchEvent_1 = __webpack_require__(88);
+	var PendingSearchAsYouTypeSearchEvent_1 = __webpack_require__(91);
 	var Assert_1 = __webpack_require__(8);
 	var Logger_1 = __webpack_require__(9);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var Defer_1 = __webpack_require__(24);
 	var Dom_1 = __webpack_require__(3);
-	var AnalyticsEvents_1 = __webpack_require__(89);
-	var APIAnalyticsBuilder_1 = __webpack_require__(88);
+	var AnalyticsEvents_1 = __webpack_require__(90);
+	var APIAnalyticsBuilder_1 = __webpack_require__(89);
 	var QueryStateModel_1 = __webpack_require__(11);
 	var Component_1 = __webpack_require__(10);
 	var Version_1 = __webpack_require__(47);
@@ -12914,7 +12921,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -12925,8 +12932,8 @@ var playground =
 	var Component_1 = __webpack_require__(10);
 	var QueryController_1 = __webpack_require__(16);
 	var Defer_1 = __webpack_require__(24);
-	var APIAnalyticsBuilder_1 = __webpack_require__(88);
-	var AnalyticsEvents_1 = __webpack_require__(89);
+	var APIAnalyticsBuilder_1 = __webpack_require__(89);
+	var AnalyticsEvents_1 = __webpack_require__(90);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var QueryStateModel_1 = __webpack_require__(11);
 	var PendingSearchEvent = (function () {
@@ -13053,7 +13060,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 88 */
+/* 89 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13126,7 +13133,7 @@ var playground =
 
 
 /***/ },
-/* 89 */
+/* 90 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13153,7 +13160,7 @@ var playground =
 
 
 /***/ },
-/* 90 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -13162,7 +13169,7 @@ var playground =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var PendingSearchEvent_1 = __webpack_require__(87);
+	var PendingSearchEvent_1 = __webpack_require__(88);
 	var Dom_1 = __webpack_require__(3);
 	var InitializationEvents_1 = __webpack_require__(57);
 	var _ = __webpack_require__(4);
@@ -13256,7 +13263,7 @@ var playground =
 
 
 /***/ },
-/* 91 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -13328,7 +13335,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 92 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -13340,19 +13347,19 @@ var playground =
 	var SearchInterface_1 = __webpack_require__(42);
 	var ComponentOptions_1 = __webpack_require__(52);
 	var QueryEvents_1 = __webpack_require__(23);
-	var OmniboxEvents_1 = __webpack_require__(93);
-	var ResultListEvents_1 = __webpack_require__(76);
-	var SettingsEvents_1 = __webpack_require__(94);
-	var PreferencesPanelEvents_1 = __webpack_require__(95);
-	var AnalyticsEvents_1 = __webpack_require__(89);
+	var OmniboxEvents_1 = __webpack_require__(94);
+	var ResultListEvents_1 = __webpack_require__(77);
+	var SettingsEvents_1 = __webpack_require__(95);
+	var PreferencesPanelEvents_1 = __webpack_require__(96);
+	var AnalyticsEvents_1 = __webpack_require__(90);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
-	var BreadcrumbEvents_1 = __webpack_require__(96);
-	var QuickviewEvents_1 = __webpack_require__(97);
+	var BreadcrumbEvents_1 = __webpack_require__(97);
+	var QuickviewEvents_1 = __webpack_require__(98);
 	var QueryStateModel_1 = __webpack_require__(11);
 	var Model_1 = __webpack_require__(12);
 	var Utils_1 = __webpack_require__(6);
 	var Dom_1 = __webpack_require__(3);
-	var ResponsiveRecommendation_1 = __webpack_require__(98);
+	var ResponsiveRecommendation_1 = __webpack_require__(99);
 	var coveo_analytics_1 = __webpack_require__(32);
 	/**
 	 * This component is a {@link SearchInterface} that will display recommendations based on the user history.
@@ -13588,7 +13595,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 93 */
+/* 94 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13606,7 +13613,7 @@ var playground =
 
 
 /***/ },
-/* 94 */
+/* 95 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13620,7 +13627,7 @@ var playground =
 
 
 /***/ },
-/* 95 */
+/* 96 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13635,7 +13642,7 @@ var playground =
 
 
 /***/ },
-/* 96 */
+/* 97 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13664,7 +13671,7 @@ var playground =
 
 
 /***/ },
-/* 97 */
+/* 98 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13679,23 +13686,23 @@ var playground =
 
 
 /***/ },
-/* 98 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
-	var ResponsiveComponentsManager_1 = __webpack_require__(99);
-	var ResponsiveComponentsUtils_1 = __webpack_require__(100);
+	var ResponsiveComponentsManager_1 = __webpack_require__(100);
+	var ResponsiveComponentsUtils_1 = __webpack_require__(101);
 	var SearchInterface_1 = __webpack_require__(42);
 	var Utils_1 = __webpack_require__(6);
 	var Dom_1 = __webpack_require__(3);
 	var Logger_1 = __webpack_require__(9);
-	var Recommendation_1 = __webpack_require__(92);
-	var RecommendationDropdownContent_1 = __webpack_require__(143);
-	var ResponsiveDropdownHeader_1 = __webpack_require__(140);
-	var ResponsiveDropdown_1 = __webpack_require__(138);
+	var Recommendation_1 = __webpack_require__(93);
+	var RecommendationDropdownContent_1 = __webpack_require__(144);
+	var ResponsiveDropdownHeader_1 = __webpack_require__(141);
+	var ResponsiveDropdown_1 = __webpack_require__(139);
 	var Strings_1 = __webpack_require__(64);
-	var FacetSlider_1 = __webpack_require__(123);
-	var Facet_1 = __webpack_require__(101);
+	var FacetSlider_1 = __webpack_require__(124);
+	var Facet_1 = __webpack_require__(102);
 	var Component_1 = __webpack_require__(10);
 	var ResponsiveRecommendation = (function () {
 	    function ResponsiveRecommendation(coveoRoot, ID, options, responsiveDropdown) {
@@ -13853,7 +13860,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 99 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -13861,10 +13868,10 @@ var playground =
 	var InitializationEvents_1 = __webpack_require__(57);
 	var Component_1 = __webpack_require__(10);
 	var SearchInterface_1 = __webpack_require__(42);
-	var ResponsiveComponentsUtils_1 = __webpack_require__(100);
+	var ResponsiveComponentsUtils_1 = __webpack_require__(101);
 	var Utils_1 = __webpack_require__(6);
-	var Facet_1 = __webpack_require__(101);
-	var Tab_1 = __webpack_require__(141);
+	var Facet_1 = __webpack_require__(102);
+	var Tab_1 = __webpack_require__(142);
 	var ResponsiveComponentsManager = (function () {
 	    function ResponsiveComponentsManager(root) {
 	        var _this = this;
@@ -14020,7 +14027,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 100 */
+/* 101 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14067,7 +14074,7 @@ var playground =
 
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="../../controllers/HierarchicalFacetQueryController.ts" />
@@ -14087,41 +14094,41 @@ var playground =
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var Component_1 = __webpack_require__(10);
-	var FacetValues_1 = __webpack_require__(102);
+	var FacetValues_1 = __webpack_require__(103);
 	var ComponentOptions_1 = __webpack_require__(52);
 	var DeviceUtils_1 = __webpack_require__(46);
 	var Strings_1 = __webpack_require__(64);
-	var FacetQueryController_1 = __webpack_require__(103);
-	var FacetSearch_1 = __webpack_require__(106);
-	var FacetSettings_1 = __webpack_require__(113);
-	var FacetSort_1 = __webpack_require__(114);
-	var FacetValuesList_1 = __webpack_require__(115);
-	var FacetHeader_1 = __webpack_require__(116);
-	var FacetUtils_1 = __webpack_require__(105);
+	var FacetQueryController_1 = __webpack_require__(104);
+	var FacetSearch_1 = __webpack_require__(107);
+	var FacetSettings_1 = __webpack_require__(114);
+	var FacetSort_1 = __webpack_require__(115);
+	var FacetValuesList_1 = __webpack_require__(116);
+	var FacetHeader_1 = __webpack_require__(117);
+	var FacetUtils_1 = __webpack_require__(106);
 	var InitializationEvents_1 = __webpack_require__(57);
 	var QueryEvents_1 = __webpack_require__(23);
 	var Assert_1 = __webpack_require__(8);
 	var Dom_1 = __webpack_require__(3);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var Utils_1 = __webpack_require__(6);
-	var BreadcrumbValueElement_1 = __webpack_require__(117);
-	var BreadcrumbValuesList_1 = __webpack_require__(118);
-	var FacetValueElement_1 = __webpack_require__(109);
-	var FacetSearchValuesList_1 = __webpack_require__(119);
+	var BreadcrumbValueElement_1 = __webpack_require__(118);
+	var BreadcrumbValuesList_1 = __webpack_require__(119);
+	var FacetValueElement_1 = __webpack_require__(110);
+	var FacetSearchValuesList_1 = __webpack_require__(120);
 	var Defer_1 = __webpack_require__(24);
 	var QueryStateModel_1 = __webpack_require__(11);
 	var Model_1 = __webpack_require__(12);
-	var OmniboxEvents_1 = __webpack_require__(93);
-	var OmniboxValueElement_1 = __webpack_require__(120);
-	var OmniboxValuesList_1 = __webpack_require__(121);
-	var ValueElementRenderer_1 = __webpack_require__(111);
-	var FacetSearchParameters_1 = __webpack_require__(104);
+	var OmniboxEvents_1 = __webpack_require__(94);
+	var OmniboxValueElement_1 = __webpack_require__(121);
+	var OmniboxValuesList_1 = __webpack_require__(122);
+	var ValueElementRenderer_1 = __webpack_require__(112);
+	var FacetSearchParameters_1 = __webpack_require__(105);
 	var Initialization_1 = __webpack_require__(56);
-	var BreadcrumbEvents_1 = __webpack_require__(96);
-	var ResponsiveFacets_1 = __webpack_require__(122);
-	var KeyboardUtils_1 = __webpack_require__(78);
-	var FacetValuesOrder_1 = __webpack_require__(112);
-	var SearchAlertEvents_1 = __webpack_require__(137);
+	var BreadcrumbEvents_1 = __webpack_require__(97);
+	var ResponsiveFacets_1 = __webpack_require__(123);
+	var KeyboardUtils_1 = __webpack_require__(79);
+	var FacetValuesOrder_1 = __webpack_require__(113);
+	var SearchAlertEvents_1 = __webpack_require__(138);
 	/**
 	 * This component displays a facet of the results for the current query. A facet consists of a list of values for a given field occurring in the results, ordered using a configurable criteria.<br/>
 	 * The list of values is obtained using a {@link IGroupByRequest} operation performed at the same time as the main query.<br/>
@@ -15452,7 +15459,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 102 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -15730,16 +15737,16 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 103 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path='../ui/Facet/Facet.ts' />
 	"use strict";
 	var ExpressionBuilder_1 = __webpack_require__(19);
 	var Utils_1 = __webpack_require__(6);
-	var FacetSearchParameters_1 = __webpack_require__(104);
+	var FacetSearchParameters_1 = __webpack_require__(105);
 	var Assert_1 = __webpack_require__(8);
-	var FacetUtils_1 = __webpack_require__(105);
+	var FacetUtils_1 = __webpack_require__(106);
 	var FacetQueryController = (function () {
 	    function FacetQueryController(facet) {
 	        this.facet = facet;
@@ -16013,13 +16020,13 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 104 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="Facet.ts" />
 	"use strict";
 	var Utils_1 = __webpack_require__(6);
-	var FacetUtils_1 = __webpack_require__(105);
+	var FacetUtils_1 = __webpack_require__(106);
 	var QueryBuilder_1 = __webpack_require__(18);
 	var Dom_1 = __webpack_require__(3);
 	var FacetSearchParameters = (function () {
@@ -16128,13 +16135,13 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 105 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var StringUtils_1 = __webpack_require__(55);
 	var QueryUtils_1 = __webpack_require__(20);
-	var FileTypes_1 = __webpack_require__(70);
+	var FileTypes_1 = __webpack_require__(71);
 	var DateUtils_1 = __webpack_require__(67);
 	var Utils_1 = __webpack_require__(6);
 	var Dom_1 = __webpack_require__(3);
@@ -16272,33 +16279,33 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 106 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="Facet.ts" />
 	"use strict";
-	var Facet_1 = __webpack_require__(101);
+	var Facet_1 = __webpack_require__(102);
 	var Dom_1 = __webpack_require__(3);
 	var Utils_1 = __webpack_require__(6);
 	var InitializationEvents_1 = __webpack_require__(57);
 	var DeviceUtils_1 = __webpack_require__(46);
-	var EventsUtils_1 = __webpack_require__(107);
-	var FacetSearchParameters_1 = __webpack_require__(104);
+	var EventsUtils_1 = __webpack_require__(108);
+	var FacetSearchParameters_1 = __webpack_require__(105);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var Component_1 = __webpack_require__(10);
 	var DomUtils_1 = __webpack_require__(66);
-	var PopupUtils_1 = __webpack_require__(108);
+	var PopupUtils_1 = __webpack_require__(109);
 	var Strings_1 = __webpack_require__(64);
 	var Assert_1 = __webpack_require__(8);
-	var KeyboardUtils_1 = __webpack_require__(78);
-	var FacetUtils_1 = __webpack_require__(105);
-	var FacetValues_1 = __webpack_require__(102);
+	var KeyboardUtils_1 = __webpack_require__(79);
+	var FacetUtils_1 = __webpack_require__(106);
+	var FacetValues_1 = __webpack_require__(103);
 	var StringUtils_1 = __webpack_require__(55);
-	var FacetValueElement_1 = __webpack_require__(109);
+	var FacetValueElement_1 = __webpack_require__(110);
 	var ExternalModulesShim_1 = __webpack_require__(28);
 	var SearchInterface_1 = __webpack_require__(42);
-	var ResponsiveComponentsUtils_1 = __webpack_require__(100);
-	var FacetValuesOrder_1 = __webpack_require__(112);
+	var ResponsiveComponentsUtils_1 = __webpack_require__(101);
+	var FacetValuesOrder_1 = __webpack_require__(113);
 	/**
 	 * Used by the {@link Facet} component to render and handle the facet search part of each facet.
 	 */
@@ -16858,7 +16865,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 107 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -16891,7 +16898,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 108 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -17055,7 +17062,7 @@ var playground =
 
 
 /***/ },
-/* 109 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="Facet.ts" />
@@ -17067,7 +17074,7 @@ var playground =
 	};
 	var QueryEvents_1 = __webpack_require__(23);
 	var Dom_1 = __webpack_require__(3);
-	var ValueElement_1 = __webpack_require__(110);
+	var ValueElement_1 = __webpack_require__(111);
 	var FacetValueElement = (function (_super) {
 	    __extends(FacetValueElement, _super);
 	    function FacetValueElement(facet, facetValue, keepDisplayedValueNextTime) {
@@ -17091,18 +17098,18 @@ var playground =
 
 
 /***/ },
-/* 110 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ValueElementRenderer_1 = __webpack_require__(111);
+	var ValueElementRenderer_1 = __webpack_require__(112);
 	var Utils_1 = __webpack_require__(6);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var Dom_1 = __webpack_require__(3);
 	var DeviceUtils_1 = __webpack_require__(46);
 	var Defer_1 = __webpack_require__(24);
 	var ExternalModulesShim_1 = __webpack_require__(28);
-	var KeyboardUtils_1 = __webpack_require__(78);
+	var KeyboardUtils_1 = __webpack_require__(79);
 	var ValueElement = (function () {
 	    function ValueElement(facet, facetValue, onSelect, onExclude) {
 	        this.facet = facet;
@@ -17292,7 +17299,7 @@ var playground =
 
 
 /***/ },
-/* 111 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -17502,7 +17509,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 112 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -17557,7 +17564,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 113 */
+/* 114 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -17566,7 +17573,7 @@ var playground =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var FacetSort_1 = __webpack_require__(114);
+	var FacetSort_1 = __webpack_require__(115);
 	var Dom_1 = __webpack_require__(3);
 	var LocalStorageUtils_1 = __webpack_require__(21);
 	var Utils_1 = __webpack_require__(6);
@@ -17574,7 +17581,7 @@ var playground =
 	var QueryStateModel_1 = __webpack_require__(11);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var DeviceUtils_1 = __webpack_require__(46);
-	var PopupUtils_1 = __webpack_require__(108);
+	var PopupUtils_1 = __webpack_require__(109);
 	/**
 	 * Handle the rendering of the {@link Facet} settings menu (typically the ... in the facet header).
 	 */
@@ -18052,12 +18059,12 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 114 */
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var Strings_1 = __webpack_require__(64);
-	var FacetSettings_1 = __webpack_require__(113);
+	var FacetSettings_1 = __webpack_require__(114);
 	var Utils_1 = __webpack_require__(6);
 	var FacetSort = (function () {
 	    function FacetSort(sorts, facet) {
@@ -18153,17 +18160,17 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 115 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="Facet.ts" />
 	"use strict";
-	var FacetValueElement_1 = __webpack_require__(109);
+	var FacetValueElement_1 = __webpack_require__(110);
 	var Dom_1 = __webpack_require__(3);
-	var FacetValues_1 = __webpack_require__(102);
+	var FacetValues_1 = __webpack_require__(103);
 	var Utils_1 = __webpack_require__(6);
-	var FacetUtils_1 = __webpack_require__(105);
-	var FacetValuesOrder_1 = __webpack_require__(112);
+	var FacetUtils_1 = __webpack_require__(106);
+	var FacetValuesOrder_1 = __webpack_require__(113);
 	var FacetValuesList = (function () {
 	    function FacetValuesList(facet, facetValueElementKlass) {
 	        this.facet = facet;
@@ -18312,14 +18319,14 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 116 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="Facet.ts" />
 	/// <reference path="FacetSettings.ts" />
 	"use strict";
 	var Dom_1 = __webpack_require__(3);
-	var FacetUtils_1 = __webpack_require__(105);
+	var FacetUtils_1 = __webpack_require__(106);
 	var Strings_1 = __webpack_require__(64);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var FacetHeader = (function () {
@@ -18513,7 +18520,7 @@ var playground =
 
 
 /***/ },
-/* 117 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="Facet.ts" />
@@ -18575,7 +18582,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 118 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -18712,7 +18719,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 119 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -18739,7 +18746,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 120 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/// <reference path="Facet.ts" />
@@ -18749,7 +18756,7 @@ var playground =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var ValueElement_1 = __webpack_require__(110);
+	var ValueElement_1 = __webpack_require__(111);
 	var OmniboxValueElement = (function (_super) {
 	    __extends(OmniboxValueElement, _super);
 	    function OmniboxValueElement(facet, facetValue, eventArg, onSelect, onExclude) {
@@ -18767,13 +18774,13 @@ var playground =
 
 
 /***/ },
-/* 121 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var Dom_1 = __webpack_require__(3);
 	var Utils_1 = __webpack_require__(6);
-	var FacetUtils_1 = __webpack_require__(105);
+	var FacetUtils_1 = __webpack_require__(106);
 	var OmniboxValuesList = (function () {
 	    function OmniboxValuesList(facet, facetValues, omniboxObject, omniboxValueElementKlass) {
 	        this.facet = facet;
@@ -18867,22 +18874,22 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 122 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var Dom_1 = __webpack_require__(3);
-	var ResponsiveComponentsManager_1 = __webpack_require__(99);
-	var ResponsiveComponentsUtils_1 = __webpack_require__(100);
+	var ResponsiveComponentsManager_1 = __webpack_require__(100);
+	var ResponsiveComponentsUtils_1 = __webpack_require__(101);
 	var Component_1 = __webpack_require__(10);
 	var Logger_1 = __webpack_require__(9);
 	var Strings_1 = __webpack_require__(64);
 	var Utils_1 = __webpack_require__(6);
-	var Facet_1 = __webpack_require__(101);
-	var FacetSlider_1 = __webpack_require__(123);
-	var ResponsiveDropdown_1 = __webpack_require__(138);
-	var ResponsiveDropdownContent_1 = __webpack_require__(139);
-	var ResponsiveDropdownHeader_1 = __webpack_require__(140);
+	var Facet_1 = __webpack_require__(102);
+	var FacetSlider_1 = __webpack_require__(124);
+	var ResponsiveDropdown_1 = __webpack_require__(139);
+	var ResponsiveDropdownContent_1 = __webpack_require__(140);
+	var ResponsiveDropdownHeader_1 = __webpack_require__(141);
 	var ResponsiveFacets = (function () {
 	    function ResponsiveFacets(coveoRoot, ID, options, responsiveDropdown) {
 	        this.coveoRoot = coveoRoot;
@@ -19049,7 +19056,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 123 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="../Facet/FacetHeader.ts" />
@@ -19060,28 +19067,28 @@ var playground =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var Slider_1 = __webpack_require__(124);
+	var Slider_1 = __webpack_require__(125);
 	var Component_1 = __webpack_require__(10);
 	var ComponentOptions_1 = __webpack_require__(52);
-	var ResponsiveFacets_1 = __webpack_require__(122);
-	var FacetHeader_1 = __webpack_require__(116);
+	var ResponsiveFacets_1 = __webpack_require__(123);
+	var FacetHeader_1 = __webpack_require__(117);
 	var Strings_1 = __webpack_require__(64);
 	var InitializationEvents_1 = __webpack_require__(57);
-	var FeatureDetectionUtils_1 = __webpack_require__(135);
-	var FacetSliderQueryController_1 = __webpack_require__(136);
+	var FeatureDetectionUtils_1 = __webpack_require__(136);
+	var FacetSliderQueryController_1 = __webpack_require__(137);
 	var QueryEvents_1 = __webpack_require__(23);
-	var BreadcrumbEvents_1 = __webpack_require__(96);
+	var BreadcrumbEvents_1 = __webpack_require__(97);
 	var Model_1 = __webpack_require__(12);
 	var Dom_1 = __webpack_require__(3);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var QueryStateModel_1 = __webpack_require__(11);
-	var SliderEvents_1 = __webpack_require__(125);
+	var SliderEvents_1 = __webpack_require__(126);
 	var Assert_1 = __webpack_require__(8);
 	var Utils_1 = __webpack_require__(6);
-	var ResponsiveComponentsUtils_1 = __webpack_require__(100);
+	var ResponsiveComponentsUtils_1 = __webpack_require__(101);
 	var Initialization_1 = __webpack_require__(56);
-	var d3 = __webpack_require__(134);
-	var SearchAlertEvents_1 = __webpack_require__(137);
+	var d3 = __webpack_require__(135);
+	var SearchAlertEvents_1 = __webpack_require__(138);
 	/**
 	 * The FacetSlider component allows to create a facet that renders a slider widget to filter on a range of numerical values
 	 * rather than the classic multi-select facet with a label and a count for each values.<br/>
@@ -19863,16 +19870,16 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 124 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var Dom_1 = __webpack_require__(3);
 	var DeviceUtils_1 = __webpack_require__(46);
-	var SliderEvents_1 = __webpack_require__(125);
+	var SliderEvents_1 = __webpack_require__(126);
 	var Utils_1 = __webpack_require__(6);
-	var d3Scale = __webpack_require__(126);
-	var d3 = __webpack_require__(134);
+	var d3Scale = __webpack_require__(127);
+	var d3 = __webpack_require__(135);
 	var Globalize = __webpack_require__(69);
 	var Slider = (function () {
 	    function Slider(element, options, root) {
@@ -20564,7 +20571,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 125 */
+/* 126 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20581,12 +20588,12 @@ var playground =
 
 
 /***/ },
-/* 126 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-scale/ Version 1.0.4. Copyright 2016 Mike Bostock.
 	(function (global, factory) {
-	   true ? factory(exports, __webpack_require__(127), __webpack_require__(128), __webpack_require__(129), __webpack_require__(131), __webpack_require__(132), __webpack_require__(133), __webpack_require__(130)) :
+	   true ? factory(exports, __webpack_require__(128), __webpack_require__(129), __webpack_require__(130), __webpack_require__(132), __webpack_require__(133), __webpack_require__(134), __webpack_require__(131)) :
 	  typeof define === 'function' && define.amd ? define(['exports', 'd3-array', 'd3-collection', 'd3-interpolate', 'd3-format', 'd3-time', 'd3-time-format', 'd3-color'], factory) :
 	  (factory((global.d3 = global.d3 || {}),global.d3,global.d3,global.d3,global.d3,global.d3,global.d3,global.d3));
 	}(this, (function (exports,d3Array,d3Collection,d3Interpolate,d3Format,d3Time,d3TimeFormat,d3Color) { 'use strict';
@@ -21490,7 +21497,7 @@ var playground =
 
 
 /***/ },
-/* 127 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-array/ Version 1.0.2. Copyright 2016 Mike Bostock.
@@ -21961,7 +21968,7 @@ var playground =
 
 
 /***/ },
-/* 128 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-collection/ Version 1.0.2. Copyright 2016 Mike Bostock.
@@ -22184,12 +22191,12 @@ var playground =
 
 
 /***/ },
-/* 129 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-interpolate/ Version 1.1.2. Copyright 2016 Mike Bostock.
 	(function (global, factory) {
-	   true ? factory(exports, __webpack_require__(130)) :
+	   true ? factory(exports, __webpack_require__(131)) :
 	  typeof define === 'function' && define.amd ? define(['exports', 'd3-color'], factory) :
 	  (factory((global.d3 = global.d3 || {}),global.d3));
 	}(this, (function (exports,d3Color) { 'use strict';
@@ -22735,7 +22742,7 @@ var playground =
 
 
 /***/ },
-/* 130 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-color/ Version 1.0.2. Copyright 2016 Mike Bostock.
@@ -23264,7 +23271,7 @@ var playground =
 
 
 /***/ },
-/* 131 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-format/ Version 1.0.2. Copyright 2016 Mike Bostock.
@@ -23598,7 +23605,7 @@ var playground =
 	}));
 
 /***/ },
-/* 132 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-time/ Version 1.0.4. Copyright 2016 Mike Bostock.
@@ -23982,12 +23989,12 @@ var playground =
 
 
 /***/ },
-/* 133 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-time-format/ Version 2.0.3. Copyright 2016 Mike Bostock.
 	(function (global, factory) {
-	   true ? factory(exports, __webpack_require__(132)) :
+	   true ? factory(exports, __webpack_require__(133)) :
 	  typeof define === 'function' && define.amd ? define(['exports', 'd3-time'], factory) :
 	  (factory((global.d3 = global.d3 || {}),global.d3));
 	}(this, (function (exports,d3Time) { 'use strict';
@@ -24576,7 +24583,7 @@ var playground =
 
 
 /***/ },
-/* 134 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org Version 4.4.0. Copyright 2016 Mike Bostock.
@@ -40975,7 +40982,7 @@ var playground =
 
 
 /***/ },
-/* 135 */
+/* 136 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -40991,7 +40998,7 @@ var playground =
 
 
 /***/ },
-/* 136 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {/// <reference path="../ui/FacetSlider/FacetSlider.ts" />
@@ -41256,7 +41263,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 137 */
+/* 138 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -41273,12 +41280,12 @@ var playground =
 
 
 /***/ },
-/* 138 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var Dom_1 = __webpack_require__(3);
-	var EventsUtils_1 = __webpack_require__(107);
+	var EventsUtils_1 = __webpack_require__(108);
 	var ResponsiveDropdown = (function () {
 	    function ResponsiveDropdown(dropdownContent, dropdownHeader, coveoRoot) {
 	        this.dropdownContent = dropdownContent;
@@ -41384,13 +41391,13 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 139 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Dom_1 = __webpack_require__(3);
-	var PopupUtils_1 = __webpack_require__(108);
-	var ResponsiveComponentsManager_1 = __webpack_require__(99);
+	var PopupUtils_1 = __webpack_require__(109);
+	var ResponsiveComponentsManager_1 = __webpack_require__(100);
 	var ResponsiveDropdownContent = (function () {
 	    function ResponsiveDropdownContent(componentName, element, coveoRoot, minWidth, widthRatio) {
 	        this.element = element;
@@ -41425,7 +41432,7 @@ var playground =
 
 
 /***/ },
-/* 140 */
+/* 141 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -41452,7 +41459,7 @@ var playground =
 
 
 /***/ },
-/* 141 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -41461,7 +41468,7 @@ var playground =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var ResponsiveTabs_ts_1 = __webpack_require__(142);
+	var ResponsiveTabs_ts_1 = __webpack_require__(143);
 	var Component_1 = __webpack_require__(10);
 	var ComponentOptions_1 = __webpack_require__(52);
 	var Model_1 = __webpack_require__(12);
@@ -41473,7 +41480,7 @@ var playground =
 	var Utils_1 = __webpack_require__(6);
 	var Assert_1 = __webpack_require__(8);
 	var Dom_1 = __webpack_require__(3);
-	var KeyboardUtils_1 = __webpack_require__(78);
+	var KeyboardUtils_1 = __webpack_require__(79);
 	/**
 	 * This component is a bar allowing users to select a search interface.
 	 *
@@ -41752,21 +41759,21 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 142 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
 	var Dom_1 = __webpack_require__(3);
 	var InitializationEvents_1 = __webpack_require__(57);
-	var PopupUtils_1 = __webpack_require__(108);
-	var EventsUtils_1 = __webpack_require__(107);
+	var PopupUtils_1 = __webpack_require__(109);
+	var EventsUtils_1 = __webpack_require__(108);
 	var Utils_1 = __webpack_require__(6);
 	var Logger_1 = __webpack_require__(9);
 	var Component_1 = __webpack_require__(10);
 	var SearchInterface_1 = __webpack_require__(42);
-	var Tab_1 = __webpack_require__(141);
-	var ResponsiveComponentsManager_1 = __webpack_require__(99);
-	var ResponsiveComponentsUtils_1 = __webpack_require__(100);
+	var Tab_1 = __webpack_require__(142);
+	var ResponsiveComponentsManager_1 = __webpack_require__(100);
+	var ResponsiveComponentsUtils_1 = __webpack_require__(101);
 	var Strings_1 = __webpack_require__(64);
 	var ResponsiveTabs = (function () {
 	    function ResponsiveTabs(coveoRoot, ID) {
@@ -42090,11 +42097,11 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 143 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var ResponsiveDropdownContent_1 = __webpack_require__(139);
+	var ResponsiveDropdownContent_1 = __webpack_require__(140);
 	var Dom_1 = __webpack_require__(3);
 	var RecommendationDropdownContent = (function () {
 	    function RecommendationDropdownContent(componentName, element, coveoRoot) {
@@ -42130,7 +42137,7 @@ var playground =
 
 
 /***/ },
-/* 144 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42139,7 +42146,7 @@ var playground =
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var LiveAnalyticsClient_1 = __webpack_require__(86);
+	var LiveAnalyticsClient_1 = __webpack_require__(87);
 	var AnalyticsActionListMeta_1 = __webpack_require__(59);
 	var Component_1 = __webpack_require__(10);
 	var SearchInterface_1 = __webpack_require__(42);
@@ -42187,7 +42194,7 @@ var playground =
 
 
 /***/ },
-/* 145 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42511,7 +42518,7 @@ var playground =
 
 
 /***/ },
-/* 146 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(_) {"use strict";
@@ -42533,11 +42540,11 @@ var playground =
 	var Initialization_1 = __webpack_require__(56);
 	var Defer_1 = __webpack_require__(24);
 	var DeviceUtils_1 = __webpack_require__(46);
-	var ResultListEvents_1 = __webpack_require__(76);
+	var ResultListEvents_1 = __webpack_require__(77);
 	var Utils_1 = __webpack_require__(6);
 	var DomUtils_1 = __webpack_require__(66);
-	var Recommendation_1 = __webpack_require__(92);
-	var DefaultRecommendationTemplate_1 = __webpack_require__(147);
+	var Recommendation_1 = __webpack_require__(93);
+	var DefaultRecommendationTemplate_1 = __webpack_require__(148);
 	/**
 	 * This component is responsible for displaying the results of the current query using one or more result templates.<br/>
 	 * It supports many additional features such as infinite scrolling.
@@ -43033,7 +43040,7 @@ var playground =
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 147 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
