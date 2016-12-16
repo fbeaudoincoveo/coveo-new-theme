@@ -57,7 +57,7 @@ var SuggestionScope = '@syssource="Web - JsSearchRef"'; //Search Box suggestion 
 var searchToken = 'search-ui'; //API Key allowing to query
 var hostname = window.location.hostname; //To manage dev/staging/prod environment
 var TechDocSearchPage = 'https://search.coveo.com/techdoc2.html';
-if (hostname == "onlinehelp.coveo.com") {
+if (hostname == "coveo.github.io") {
 	// Use the production org (coveosearch)
 	searchToken = '7b9b9300-3901-437b-bafd-51ae596f1b16';
 	uaToken = searchToken;
@@ -92,8 +92,7 @@ $(function(){
 							return valueSelected == result.raw.systitle;
 						});
 						if(foundResult){
-							//logCustomEvent('pageNav', 'omniboxTitleSuggestion', uaToken, foundResult.Title, foundResult.clickUri);
-							//console.log('Navigation type, label, target: ' + 'omniboxTitleSuggestion' + ' | ' + foundResult.Title + ' | ' + foundResult.clickUri);
+							logCustomEvent('pageNav', 'omniboxTitleSuggestion', uaToken, foundResult.Title, foundResult.clickUri);
 							window.location = foundResult.clickUri;
 						} else {
 							logger.warn("Selected suggested result," + valueSelected + " , not found.");
