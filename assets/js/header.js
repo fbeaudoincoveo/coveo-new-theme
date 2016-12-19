@@ -1,4 +1,3 @@
-
 $(window).ready(function(){
     trackEventsGa();
     //trigger mobile menu
@@ -38,17 +37,12 @@ function trackEventsGa(){
     $("#jsTechBlog").click(function(){ ga('send', 'event', 'TopMenus', 'click', 'Tech Blog');});
 }
 
-
-
 //Mobile detection
 function isMobile(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         return true;
     }
 }
-
-
-
 
 // Set the Coveo Cloud Organization search and analytics tokens
 var siteOrigin= 'JSSearchRef'; //Take the value from https://search.coveo.com/JS/TechDoc.js
@@ -89,7 +83,7 @@ $(function(){
 					.done(function (results) {
 						/*window.location = results.results[0].clickUri;*/
 						var foundResult = Coveo._.find(results.results, function(result){
-							return valueSelected == result.raw.systitle;
+							return valueSelected == result.raw.systitle && !result.ClickUri.includes('/ac8/');
 						});
 						if(foundResult){
 							logCustomEvent('pageNav', 'omniboxTitleSuggestion', uaToken, foundResult.Title, foundResult.clickUri);

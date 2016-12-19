@@ -126,10 +126,6 @@ div.container.container-main {
     max-width: inherit;
 }
 
-#filter-box-body {
-    height: 125px;
-}
-
 .ctr-box-filter label {
     opacity: 1;
 }

@@ -1747,6 +1747,10 @@ var playground =
 	        Assert_1.Assert.exists(result);
 	        Dom_1.$$(element).addClass('CoveoResult');
 	        element['CoveoResult'] = result;
+	        var jQuery = JQueryutils_1.JQueryUtils.getJQuery();
+	        if (jQuery) {
+	            jQuery(element).data(result);
+	        }
 	    };
 	    Component.resolveBinding = function (element, componentClass) {
 	        Assert_1.Assert.exists(element);
@@ -1993,6 +1997,7 @@ var playground =
 	    };
 	    QueryStateModel.prototype.validate = function (attribute, value) {
 	        if (attribute == QueryStateModel.attributesEnum.first) {
+	            Assert_1.Assert.isNumber(value);
 	            Assert_1.Assert.isLargerOrEqualsThan(0, value);
 	        }
 	    };
@@ -2143,7 +2148,9 @@ var playground =
 	            }
 	            value = _this.parseToCorrectType(attribute, value);
 	            if (!options || options.validateType) {
-	                _this.validateType(attribute, value);
+	                if (!_this.typeIsValid(attribute, value)) {
+	                    return;
+	                }
 	            }
 	            if (_this.checkIfAttributeChanged(attribute, value)) {
 	                _this.attributes[attribute] = value;
@@ -2271,20 +2278,42 @@ var playground =
 	    Model.prototype.checkIfAttributeExists = function (attribute) {
 	        Assert_1.Assert.check(_.has(this.attributes, attribute));
 	    };
-	    Model.prototype.validateType = function (attribute, value) {
+	    Model.prototype.typeIsValid = function (attribute, value) {
 	        if (!Utils_1.Utils.isNullOrUndefined(this.attributes[attribute]) && !Utils_1.Utils.isUndefined(value)) {
 	            if (_.isNumber(this.attributes[attribute])) {
-	                Assert_1.Assert.check(_.isNumber(value) && !isNaN(value), 'Non-matching type');
+	                return this.validateNumber(attribute, value);
 	            }
 	            else if (_.isBoolean(this.attributes[attribute])) {
-	                Assert_1.Assert.check(_.isBoolean(value) || Utils_1.Utils.parseBooleanIfNotUndefined(value) !== undefined, 'Non-matching type');
+	                return this.validateBoolean(attribute, value);
 	            }
 	            else {
-	                if (!Utils_1.Utils.isNullOrUndefined(this.defaultAttributes[attribute])) {
-	                    Assert_1.Assert.check(typeof value === typeof this.defaultAttributes[attribute], 'Non-matching type');
-	                }
+	                return this.validateOther(attribute, value);
 	            }
 	        }
+	        return true;
+	    };
+	    Model.prototype.validateNumber = function (attribute, value) {
+	        if (!_.isNumber(value) || isNaN(value)) {
+	            this.logger.error("Non-matching type for " + attribute + ". Expected number and got " + value);
+	            return false;
+	        }
+	        return true;
+	    };
+	    Model.prototype.validateBoolean = function (attribute, value) {
+	        if (!_.isBoolean(value) && !Utils_1.Utils.parseBooleanIfNotUndefined(value) !== undefined) {
+	            this.logger.error("Non matching type for " + attribute + ". Expected boolean and got " + value);
+	            return false;
+	        }
+	        return true;
+	    };
+	    Model.prototype.validateOther = function (attribute, value) {
+	        if (!Utils_1.Utils.isNullOrUndefined(this.defaultAttributes[attribute])) {
+	            if (typeof value !== typeof this.defaultAttributes[attribute]) {
+	                this.logger.error("Non-matching type for " + attribute + ". Expected " + typeof this.defaultAttributes[attribute] + " and got " + value);
+	                return false;
+	            }
+	        }
+	        return true;
 	    };
 	    Model.prototype.parseToCorrectType = function (attribute, value) {
 	        if (_.isNumber(this.attributes[attribute])) {
@@ -10276,13 +10305,13 @@ var playground =
 	        var ret = '#' + (w.location.href.split('#')[1] || '');
 	        return HashUtils.getAjaxcrawlableHash(ret);
 	    };
-	    HashUtils.getValue = function (value, toParse) {
-	        Assert_1.Assert.isNonEmptyString(value);
+	    HashUtils.getValue = function (key, toParse) {
+	        Assert_1.Assert.isNonEmptyString(key);
 	        Assert_1.Assert.exists(toParse);
 	        toParse = HashUtils.getAjaxcrawlableHash(toParse);
-	        var paramValue = HashUtils.getRawValue(value, toParse);
+	        var paramValue = HashUtils.getRawValue(key, toParse);
 	        if (paramValue != undefined) {
-	            paramValue = HashUtils.getValueDependingOnType(paramValue);
+	            paramValue = HashUtils.getValueDependingOnType(key, paramValue);
 	        }
 	        return paramValue;
 	    };
@@ -10313,8 +10342,8 @@ var playground =
 	            return hash;
 	        }
 	    };
-	    HashUtils.getRawValue = function (value, toParse) {
-	        Assert_1.Assert.exists(value);
+	    HashUtils.getRawValue = function (key, toParse) {
+	        Assert_1.Assert.exists(key);
 	        Assert_1.Assert.exists(toParse);
 	        Assert_1.Assert.check(toParse.indexOf('#') == 0 || toParse == '');
 	        var toParseArray = toParse.substr(1).split('&');
@@ -10323,7 +10352,7 @@ var playground =
 	        var paramValue = undefined;
 	        while (loop) {
 	            var paramValuePair = toParseArray[paramPos].split('=');
-	            if (paramValuePair[0] == value) {
+	            if (paramValuePair[0] == key) {
 	                loop = false;
 	                paramValue = paramValuePair[1];
 	            }
@@ -10337,8 +10366,8 @@ var playground =
 	        }
 	        return paramValue;
 	    };
-	    HashUtils.getValueDependingOnType = function (paramValue) {
-	        var type = HashUtils.getValueType(paramValue);
+	    HashUtils.getValueDependingOnType = function (key, paramValue) {
+	        var type = HashUtils.getValueType(key, paramValue);
 	        var returnValue;
 	        if (type == 'object') {
 	            returnValue = HashUtils.decodeObject(paramValue);
@@ -10351,8 +10380,11 @@ var playground =
 	        }
 	        return returnValue;
 	    };
-	    HashUtils.getValueType = function (paramValue) {
-	        if (HashUtils.isObject(paramValue)) {
+	    HashUtils.getValueType = function (key, paramValue) {
+	        if (key == 'q') {
+	            return 'other';
+	        }
+	        else if (HashUtils.isObject(paramValue)) {
 	            return 'object';
 	        }
 	        else if (HashUtils.isArray(paramValue)) {
@@ -11492,6 +11524,7 @@ var playground =
 	var HashUtils_1 = __webpack_require__(59);
 	var Defer_1 = __webpack_require__(24);
 	var RootComponent_1 = __webpack_require__(17);
+	var Utils_1 = __webpack_require__(6);
 	/**
 	 * This component is instantiated automatically by the framework on the root if the {@link SearchInterface}.<br/>
 	 * When the {@link SearchInterface.options.enableHistory} option is set to true, this component is instantiated.<br/>
@@ -11503,16 +11536,19 @@ var playground =
 	    /**
 	     * Create a new history controller
 	     * @param element
-	     * @param windoh For mock / test purpose.
+	     * @param windoh For mock / test purposes.
 	     * @param model
 	     * @param queryController
+	     * @param hashUtilsModule For mock / test purposes.
 	     */
-	    function HistoryController(element, windoh, model, queryController) {
+	    function HistoryController(element, windoh, model, queryController, hashUtils) {
 	        var _this = this;
+	        if (hashUtils === void 0) { hashUtils = HashUtils_1.HashUtils; }
 	        _super.call(this, element, HistoryController.ID);
 	        this.windoh = windoh;
 	        this.model = model;
 	        this.queryController = queryController;
+	        this.hashUtils = hashUtils;
 	        this.ignoreNextHashChange = false;
 	        this.initialHashChange = false;
 	        this.willUpdateHash = false;
@@ -11539,7 +11575,7 @@ var playground =
 	     */
 	    HistoryController.prototype.setHashValues = function (values) {
 	        this.logger.trace('Update history hash');
-	        var hash = '#' + HashUtils_1.HashUtils.encodeValues(values);
+	        var hash = '#' + this.hashUtils.encodeValues(values);
 	        this.ignoreNextHashChange = this.windoh.location.hash != hash;
 	        this.logger.trace('ignoreNextHashChange', this.ignoreNextHashChange);
 	        this.logger.trace('initialHashChange', this.initialHashChange);
@@ -11589,9 +11625,6 @@ var playground =
 	        var diff = [];
 	        _.each(this.model.attributes, function (value, key, obj) {
 	            var valToSet = _this.getHashValue(key);
-	            if (valToSet == undefined) {
-	                valToSet = _this.model.defaultAttributes[key];
-	            }
 	            toSet[key] = valToSet;
 	            if (_this.model.get(key) != valToSet) {
 	                diff.push(key);
@@ -11601,9 +11634,19 @@ var playground =
 	        this.model.setMultiple(toSet);
 	        return diff;
 	    };
-	    HistoryController.prototype.getHashValue = function (value) {
-	        Assert_1.Assert.isNonEmptyString(value);
-	        return HashUtils_1.HashUtils.getValue(value, HashUtils_1.HashUtils.getHash(this.windoh));
+	    HistoryController.prototype.getHashValue = function (key) {
+	        Assert_1.Assert.isNonEmptyString(key);
+	        var value;
+	        try {
+	            value = this.hashUtils.getValue(key, this.hashUtils.getHash(this.windoh));
+	        }
+	        catch (error) {
+	            this.logger.error("Could not parse parameter " + key + " from URI");
+	        }
+	        if (Utils_1.Utils.isUndefined(value)) {
+	            value = this.model.defaultAttributes[key];
+	        }
+	        return value;
 	    };
 	    HistoryController.prototype.debugInfo = function () {
 	        return {
@@ -16724,14 +16767,15 @@ var playground =
 	            groupByRequest.advancedQueryOverride = queryOverrideObject.advanced;
 	            groupByRequest.constantQueryOverride = queryOverrideObject.constant;
 	            this.expressionToUseForFacetSearch = queryOverrideObject.withoutConstant;
+	            this.basicExpressionToUseForFacetSearch = queryOverrideObject.basic;
+	            this.advancedExpressionToUseForFacetSearch = queryOverrideObject.advanced;
 	            this.constantExpressionToUseForFacetSearch = queryOverrideObject.constant;
 	        }
 	        else {
 	            var parts = queryBuilder.computeCompleteExpressionParts();
-	            this.expressionToUseForFacetSearch = parts.withoutConstant;
-	            if (this.expressionToUseForFacetSearch == null) {
-	                this.expressionToUseForFacetSearch = '@uri';
-	            }
+	            this.expressionToUseForFacetSearch = parts.withoutConstant == null ? '@uri' : parts.withoutConstant;
+	            this.basicExpressionToUseForFacetSearch = parts.basic == null ? '@uri' : parts.basic;
+	            this.advancedExpressionToUseForFacetSearch = parts.advanced;
 	            this.constantExpressionToUseForFacetSearch = parts.constant;
 	        }
 	        this.lastGroupByRequestIndex = queryBuilder.groupByRequests.length;
@@ -17020,12 +17064,12 @@ var playground =
 	        var lastQuery = _.clone(this.facet.queryController.getLastQuery());
 	        if (!lastQuery) {
 	            // There should normally always be a last query available
-	            // If not, just create en empty one.
+	            // If not, just create an empty one.
 	            lastQuery = new QueryBuilder_1.QueryBuilder().build();
 	        }
-	        lastQuery.q = this.facet.facetQueryController.expressionToUseForFacetSearch;
+	        lastQuery.q = this.facet.facetQueryController.basicExpressionToUseForFacetSearch;
 	        lastQuery.cq = this.facet.facetQueryController.constantExpressionToUseForFacetSearch;
-	        lastQuery.aq = null;
+	        lastQuery.aq = this.facet.facetQueryController.advancedExpressionToUseForFacetSearch;
 	        lastQuery.enableDidYouMean = false;
 	        lastQuery.firstResult = 0;
 	        lastQuery.numberOfResults = 0;
